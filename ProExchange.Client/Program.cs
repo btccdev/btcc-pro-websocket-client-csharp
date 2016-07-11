@@ -11,7 +11,7 @@ namespace ProExchange.Client
 {
 	class Program
 	{
-		private const string url = "wss://pro-ws.btcc.com:2012";
+		private const string url = "wss://pro-ws.btcc.com:433";
 		private const string SYMBOL = "XBTCNY";
 		private const string BPI = "BPICNY";
 
