@@ -11,11 +11,11 @@ namespace ProExchange.Client
 {
 	class Program
 	{
-		private const string url = "wss://pro-ws.btcc.com:433";
+		private const string url = "wss://pro-ws.btcc.com";
 		private const string SYMBOL = "XBTCNY";
 		private const string BPI = "BPICNY";
 
-		//private const string url = "wss://prousd-ws.btcc.com:443";
+		//private const string url = "wss://prousd-ws.btcc.com";
 		//private const string SYMBOL = "XBTUSD";
 		//private const string BPI = "BPIUSD";
 
@@ -39,6 +39,7 @@ namespace ProExchange.Client
 			// Add a callback to listen to the messages you are interested in
 			deserializer.On<Ticker>(DisplayTicker);
 			deserializer.On<AccountInfo>(DisplayAccount);
+			deserializer.On<GetAccountInfoResponse>(response => DisplayAccount(response.AccountInfo));
 			deserializer.On<ExecReport>(Console.WriteLine);
 			deserializer.On<OrderBook>(DisplayOrderBook);
 			deserializer.On<QuoteResponse>(response => DisplayOrderBook(response.OrderBook));
@@ -48,8 +49,11 @@ namespace ProExchange.Client
 				Console.WriteLine("Connected");
 				ws.Send(serializer.Serialize(new QuoteRequest() { Symbol = SYMBOL, QuoteType = 1 }));
 				//ws.Send(serializer.Serialize(new QuoteRequest() { Symbol = BPI, QuoteType = 1 }));
-				if(!String.IsNullOrEmpty(password))
+				if (!String.IsNullOrEmpty(password))
+				{
 					ws.Send(serializer.Serialize(Sign(new LoginRequest())));
+					ws.Send(serializer.Serialize(Sign(new GetAccountInfoRequest())));
+				}
 			};
 			ws.OnMessage += (a, b) => deserializer.Deserialize(b.Data);
 			ws.OnError += (a, b) =>
