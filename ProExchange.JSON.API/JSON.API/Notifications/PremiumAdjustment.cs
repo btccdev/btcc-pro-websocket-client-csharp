@@ -22,6 +22,15 @@ namespace ProExchange.JSON.API.Notifications
 		[JsonProperty(PropertyName="CCF")]
 		public int CarryingChargeFrequency;
 
+		[JsonProperty(PropertyName="ELCCR")]
+		public decimal ExpectedLongCarryingChargeRate;
+
+		[JsonProperty(PropertyName="ESCCR")]
+		public decimal ExpectedShortCarryingChargeRate;
+
+		[JsonProperty(PropertyName="ECCF")]
+		public int ExpectedCarryingChargeFrequency;
+
 		public PremiumAdjustment()
 		{
 		}

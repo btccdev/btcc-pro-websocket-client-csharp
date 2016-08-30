@@ -30,6 +30,15 @@ namespace ProExchange.JSON.API.Notifications
 		[JsonProperty(PropertyName="IMF")]
 		public double InitialMarginFactor;
 
+		[JsonProperty(PropertyName="LP")]
+		public double LiquidationPrice;
+
+		[JsonProperty(PropertyName="BIMR")]
+		public double BaseInitialMarginRequired;
+
+		[JsonProperty(PropertyName="QIMR")]
+		public double QuoteInitialMarginRequired;
+
 		public ContractDetail()
 		{
 		}

@@ -9,8 +9,12 @@ namespace ProExchange.JSON.API.Requests
 	[JsonObject]
 	public class CancelOrderRequest : SignedRequest<CancelOrderResponse>
 	{
-		[JsonProperty("OID")]
+		[JsonProperty]
 		[SignatureBody(0)]
+		public string Symbol;
+
+		[JsonProperty("OID")]
+		[SignatureBody(1)]
 		public string OrdID;
 
 		public CancelOrderRequest()

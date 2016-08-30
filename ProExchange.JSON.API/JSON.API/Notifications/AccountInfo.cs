@@ -11,29 +11,11 @@ namespace ProExchange.JSON.API.Notifications
 		[JsonProperty(PropertyName="RP")]
 		public string RiskProfile = string.Empty;
 
-		[JsonProperty(PropertyName="IL")]
-		public bool IsLiquidating;
+		[JsonProperty(PropertyName="G")]
+		public string Group = string.Empty;
 
-		[JsonProperty(PropertyName="LP")]
-		public double LiquidationPrice;
-
-		[JsonProperty(PropertyName="SOD")]
-		public double SumOfDeposit;
-
-		[JsonProperty(PropertyName="C")]
-		public double Cash;
-
-		[JsonProperty(PropertyName="P")]
-		public double Profit;
-
-		[JsonProperty(PropertyName="TS")]
-		public double TotalSize;
-
-		[JsonProperty(PropertyName="IMR")]
-		public double InitialMarginRequired;
-
-		[JsonProperty(PropertyName="UM")]
-		public double UsableMargin;
+		[JsonProperty(PropertyName="BL")]
+		public List<AccountBalance> BalanceList = new List<AccountBalance>();
 
 		[JsonProperty(PropertyName="CDL")]
 		public List<ContractDetail> ContractDetailList = new List<ContractDetail>();

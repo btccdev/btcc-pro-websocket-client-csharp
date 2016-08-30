@@ -11,14 +11,18 @@ namespace ProExchange.JSON.API.Requests
 	{
 		[JsonProperty]
 		[SignatureBody(0)]
-		public long Begin;
+		public string Symbol;
 
 		[JsonProperty]
 		[SignatureBody(1)]
-		public long End;
+		public long Begin;
 
 		[JsonProperty]
 		[SignatureBody(2)]
+		public long End;
+
+		[JsonProperty]
+		[SignatureBody(3)]
 		public string Status;
 
 		public GetOrdersRequest()

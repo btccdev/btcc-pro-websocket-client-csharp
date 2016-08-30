@@ -24,6 +24,9 @@ namespace ProExchange.JSON.API.Notifications
 		[JsonProperty(PropertyName="FT")]
 		public double FeeTotal;
 
+		[JsonProperty(PropertyName="CY")]
+		public string Currency;
+
 		public ExecTradeFeeLog()
 		{
 		}

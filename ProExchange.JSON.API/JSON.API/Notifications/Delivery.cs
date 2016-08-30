@@ -28,6 +28,9 @@ namespace ProExchange.JSON.API.Notifications
 		[JsonProperty]
 		public double Amount;
 
+		[JsonProperty]
+		public string Currency;
+
 		public Delivery()
 		{
 		}

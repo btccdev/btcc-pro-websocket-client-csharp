@@ -11,22 +11,26 @@ namespace ProExchange.JSON.API.Requests
 	{
 		[JsonProperty]
 		[SignatureBody(0)]
-		public long Start;
+		public string Symbol;
 
 		[JsonProperty]
 		[SignatureBody(1)]
-		public long End;
+		public long Start;
 
 		[JsonProperty]
 		[SignatureBody(2)]
-		public string Filter;
+		public long End;
 
 		[JsonProperty]
 		[SignatureBody(3)]
-		public int PageIndex;
+		public string Filter;
 
 		[JsonProperty]
 		[SignatureBody(4)]
+		public int PageIndex;
+
+		[JsonProperty]
+		[SignatureBody(5)]
 		public int RecCountsPerPage;
 
 		public RetrieveTransactionsRequest()

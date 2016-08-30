@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProExchange.JSON.API", "ProExchange.JSON.API.csproj", "{2719C442-96C9-42AD-B591-51A8574C3434}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProExchange.JSON.API", "ProExchange.JSON.API.csproj", "{77CA1101-AA28-4D91-9C8A-932BD4E08D19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,10 +10,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2719C442-96C9-42AD-B591-51A8574C3434}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2719C442-96C9-42AD-B591-51A8574C3434}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2719C442-96C9-42AD-B591-51A8574C3434}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2719C442-96C9-42AD-B591-51A8574C3434}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77CA1101-AA28-4D91-9C8A-932BD4E08D19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77CA1101-AA28-4D91-9C8A-932BD4E08D19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77CA1101-AA28-4D91-9C8A-932BD4E08D19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77CA1101-AA28-4D91-9C8A-932BD4E08D19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
