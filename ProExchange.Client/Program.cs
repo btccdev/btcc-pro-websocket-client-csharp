@@ -1,4 +1,8 @@
 ﻿using System;
+using System.IO;
+using System.Net;
+using System.Text;
+using Newtonsoft.Json.Linq;
 using ProExchange.Common;
 using ProExchange.Common.Security;
 using ProExchange.JSON.API;
@@ -19,14 +23,19 @@ namespace ProExchange.Client
 		//private const string SYMBOL = "XBTUSD";
 		//private const string BPI = "BPIUSD";
 
-		// Get the credentials from the LoginRequest that is sent from your browser's WebSocket
+		// Use the same credentials you would use on the website
+		private const string username = "";
 		private const string password = "";
-		private const string account = "";
-		private const string email = "";
-
+		
 		static readonly OrderBookBuilder builder = new OrderBookBuilder();
+
+		private static Credentials credentials;
+
 		static void Main(string[] args)
 		{
+			if (!String.IsNullOrEmpty(username) && !String.IsNullOrEmpty(username))
+				credentials = new Credentials(username, password);
+
 			WebSocket ws = new WebSocket(url);
 			var serializer = new JsonSerializer<Request>();
 			var deserializer = new JsonDeserializer<JsonMessageOut>();
@@ -49,7 +58,7 @@ namespace ProExchange.Client
 				Console.WriteLine("Connected");
 				ws.Send(serializer.Serialize(new QuoteRequest() { Symbol = SYMBOL, QuoteType = 1 }));
 				//ws.Send(serializer.Serialize(new QuoteRequest() { Symbol = BPI, QuoteType = 1 }));
-				if (!String.IsNullOrEmpty(password))
+				if (credentials != null)
 				{
 					ws.Send(serializer.Serialize(Sign(new LoginRequest())));
 					ws.Send(serializer.Serialize(Sign(new GetAccountInfoRequest())));
@@ -102,10 +111,10 @@ namespace ProExchange.Client
 		private static Request Sign(SignedRequest request)
 		{
 			request.ClientRequestId = Guid.NewGuid().ToString("N");
-			request.Account = account;
+			request.Account = credentials.Account;
 			request.Date = DateTime.UtcNow.ToString("yyyyMMdd");
 			request.Signature = SignatureEngine.ComputeSignature(
-				SignatureEngine.ComputeHash(password),
+				SignatureEngine.ComputeHash(credentials.Key),
 				SignatureEngine.PrepareMessage(request));
 			return request;
 		}
