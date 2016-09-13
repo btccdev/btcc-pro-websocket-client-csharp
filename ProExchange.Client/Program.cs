@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using Newtonsoft.Json.Linq;
@@ -100,7 +101,11 @@ namespace ProExchange.Client
 
 		private static void DisplayAccount(AccountInfo info)
 		{
-			Console.WriteLine(String.Format("Logged in ! Cash : {0}", info.Cash));
+			Console.WriteLine("AccountInfo :");
+			foreach (var balance in info.BalanceList)
+			{
+				Console.WriteLine("{1} : {0}", balance.Cash, balance.Currency);
+			}
 		}
 
 		private static void DisplayTicker(Ticker ticker)
