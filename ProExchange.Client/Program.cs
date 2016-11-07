@@ -30,12 +30,13 @@ namespace ProExchange.Client
 		
 		static readonly OrderBookBuilder builder = new OrderBookBuilder();
 
-		private static Credentials credentials;
+		private static ICredentials credentials;
 
 		static void Main(string[] args)
 		{
 			if (!String.IsNullOrEmpty(username) && !String.IsNullOrEmpty(username))
-				credentials = new Credentials(username, password);
+				//credentials = new Credentials(username, password);
+				credentials = new AccessKey(username, password);
 
 			WebSocket ws = new WebSocket(url);
 			var serializer = new JsonSerializer<Request>();
@@ -52,13 +53,14 @@ namespace ProExchange.Client
 			deserializer.On<GetAccountInfoResponse>(response => DisplayAccount(response.AccountInfo));
 			deserializer.On<ExecReport>(Console.WriteLine);
 			deserializer.On<OrderBook>(DisplayOrderBook);
+			deserializer.On<ErrorResponse>(DisplayErrorResponse);
 			deserializer.On<QuoteResponse>(response => DisplayOrderBook(response.OrderBook));
 			
 			ws.OnOpen += (a, b) =>
 			{
 				Console.WriteLine("Connected");
 				ws.Send(serializer.Serialize(new QuoteRequest() { Symbol = SYMBOL, QuoteType = 1 }));
-				//ws.Send(serializer.Serialize(new QuoteRequest() { Symbol = BPI, QuoteType = 1 }));
+				ws.Send(serializer.Serialize(new QuoteRequest() { Symbol = BPI, QuoteType = 1 }));
 				if (credentials != null)
 				{
 					ws.Send(serializer.Serialize(Sign(new LoginRequest())));
@@ -79,6 +81,11 @@ namespace ProExchange.Client
 
 			while (Console.ReadKey().Key != ConsoleKey.Escape)
 				ws.Send(serializer.Serialize(new QuoteRequest() { Symbol = SYMBOL, QuoteType = 2 }));
+		}
+
+		private static void DisplayErrorResponse(ErrorResponse obj)
+		{
+			Console.WriteLine("An error occured : {0}", obj.Reason);
 		}
 
 		private static void DisplayOrderBook(OrderBook obj)
@@ -123,5 +130,23 @@ namespace ProExchange.Client
 				SignatureEngine.PrepareMessage(request));
 			return request;
 		}
+	}
+
+	internal interface ICredentials
+	{
+		string Account { get; }
+		string Key { get; }
+	}
+
+	internal class AccessKey : ICredentials
+	{
+		public AccessKey(string access_key, string secret_key)
+		{
+			Account = access_key;
+			Key = secret_key;
+		}
+
+		public string Account { get; private set; }
+		public string Key { get; private set; }
 	}
 }

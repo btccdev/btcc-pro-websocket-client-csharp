@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace ProExchange.Client
 {
-	class Credentials
+	class Credentials : ICredentials
 	{
 		public string Account { get; private set; }
 		public string Key { get; private set; }
