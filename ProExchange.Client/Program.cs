@@ -1,9 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using Newtonsoft.Json.Linq;
 using ProExchange.Common;
 using ProExchange.Common.Security;
 using ProExchange.JSON.API;
@@ -16,17 +11,13 @@ namespace ProExchange.Client
 {
 	class Program
 	{
-		private const string url = "wss://pro-ws.btcc.com";
-		private const string SYMBOL = "XBTCNY";
-		private const string BPI = "BPICNY";
+		private const string url = "wss://spotusd-wsp.btcc.com";
+		private const string SYMBOL = "BTCUSD";
+		private const string BPI = "BPIUSD";
 
-		//private const string url = "wss://prousd-ws.btcc.com";
-		//private const string SYMBOL = "XBTUSD";
-		//private const string BPI = "BPIUSD";
-
-		// Use the same credentials you would use on the website
-		private const string username = "";
-		private const string password = "";
+		// generate a trading key pair on the website
+		private const string access_key = "";
+		private const string secret_key = "";
 		
 		static readonly OrderBookBuilder builder = new OrderBookBuilder();
 
@@ -34,9 +25,8 @@ namespace ProExchange.Client
 
 		static void Main(string[] args)
 		{
-			if (!String.IsNullOrEmpty(username) && !String.IsNullOrEmpty(username))
-				//credentials = new Credentials(username, password);
-				credentials = new AccessKey(username, password);
+			if (!String.IsNullOrEmpty(access_key) && !String.IsNullOrEmpty(access_key))
+				credentials = new AccessKey(access_key, secret_key);
 
 			WebSocket ws = new WebSocket(url);
 			var serializer = new JsonSerializer<Request>();
